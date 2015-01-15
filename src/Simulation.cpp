@@ -161,32 +161,37 @@ namespace practical {
 
             // the surviving body is the bigger one, so if two bodies collide and one of them is zero
             // the bigger survives.
-            Body *bodyA;
-            Body *bodyB;
+            Body *surviving;
+            Body *destroyed;
             if (body1->getMass() >= body2->getMass()) {
-                bodyA = body1;
-                bodyB = body2;
+                surviving = body1;
+                destroyed = body2;
             } else {
-                bodyA = body2;
-                bodyB = body1;
+                surviving = body2;
+                destroyed = body1;
             }
 
             // the new mass is sum of the two masses
-            float newMass = bodyA->getMass() + bodyB->getMass();
+            float newMass = surviving->getMass() + destroyed->getMass();
 
             // the velocity is = (v_i * m_i + v_j * m_j) / m
-            float newVelocityX = (bodyA->getMass() * bodyA->getVelocityX() + bodyB->getMass() * bodyB->getVelocityX()) / newMass;
-            float newVelocityY = (bodyA->getMass() * bodyA->getVelocityY() + bodyB->getMass() * bodyB->getVelocityY()) / newMass;
+            float newVelocityX = 0.0;
+            float newVelocityY = 0.0;
+
+            if (newMass > 0) {
+                newVelocityX = (surviving->getMass() * surviving->getVelocityX() + destroyed->getMass() * destroyed->getVelocityX()) / newMass;
+                newVelocityY = (surviving->getMass() * surviving->getVelocityY() + destroyed->getMass() * destroyed->getVelocityY()) / newMass;
+            }
 
             // set the new mass and destroy the other body
-            bodyA->setMass(newMass);
-            bodyB->setMass(0);
+            surviving->setMass(newMass);
+            destroyed->setMass(0);
 
-            bodyA->setVelocityX(newVelocityX);
-            bodyA->setVelocityY(newVelocityY);
+            surviving->setVelocityX(newVelocityX);
+            surviving->setVelocityY(newVelocityY);
 
-            bodyB->setVelocityX(0);
-            bodyB->setVelocityY(0);
+            destroyed->setVelocityX(0);
+            destroyed->setVelocityY(0);
         }
 
         void Simulation::setMinMaxMass(ui::BodyVisualization &vis) const {
