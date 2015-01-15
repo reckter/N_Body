@@ -29,6 +29,7 @@ int main(int argc, char **argv) {
     if (argc > 2) {
         outfile = argv[2];
     }
+
 #ifdef _OPENMP
 	LOG_INFO("With OpenMP support compiled. Max. # threads: " << omp_get_max_threads());
 #endif

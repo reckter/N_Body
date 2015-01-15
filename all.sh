@@ -2,12 +2,12 @@
 
 
 echo "\nbuilding without anything"
-cmake -DBUILD_QT=OFF -DUSE_OPENMP=OFF > /dev/null &&
+cmake -DBUILD_QT=OFF -DUSE_OPENMP=OFF $1> /dev/null &&
 make clean > /dev/null &&
 make > /dev/null &&
 
 echo "\nnbody:"
-./bin/praktikum4 nbody.txt nbody_out.txt 
+./bin/praktikum4 nbody.txt nbody_out.txt
 echo "\nrandom:"
 ./bin/praktikum4 random.txt random_out.txt
 echo "\ncollision:"
@@ -15,12 +15,12 @@ echo "\ncollision:"
 
 
 echo "\nbuilding with OpenMP"
-cmake -DBUILD_QT=OFF -DUSE_OPENMP=ON > /dev/null &&
+cmake -DBUILD_QT=OFF -DUSE_OPENMP=ON $1> /dev/null &&
 make clean > /dev/null &&
 make > /dev/null &&
 
 echo "\nnbody:"
-./bin/praktikum4 nbody.txt nbody_MP_out.txt 
+./bin/praktikum4 nbody.txt nbody_MP_out.txt
 echo "\nrandom:"
 ./bin/praktikum4 random.txt random_MP_out.txt
 echo "\ncollision:"
