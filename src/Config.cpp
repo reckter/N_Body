@@ -46,6 +46,7 @@ namespace practical {
             float px, py, vx, vy, mass;
             sim_file >> num_steps >> num_bodies >> dt >> scale >> distance;
 
+            // setting all the variables
             sim->setNum_steps(num_steps);
             sim->setNum_bodies(num_bodies);
             sim->setDt(dt);
@@ -53,6 +54,8 @@ namespace practical {
             sim->setDistance(distance);
 
             while (rcounter++ < num_bodies && sim_file >> px >> py >> vx >> vy >> mass) {
+
+                // adding a body to the simulation
                 Body tmp(px, py, distance / 2, vx, vy, mass);
                 sim->addBody(tmp);
             }
@@ -94,7 +97,7 @@ namespace practical {
         }
 
         bool Config::write(Simulation const *sim, unsigned num_steps, unsigned num_bodies, float scale, float dt, float distance) const {
-           // using namespace nmath;
+            // using namespace nmath;
             if (outfile == "") {
                 LOG_INFO("Empty string for file path.");
                 return false;
@@ -107,6 +110,7 @@ namespace practical {
             }
             sim_file << num_steps << std::endl << num_bodies << std::endl << dt << std::endl << scale << std::endl << distance << std::endl;
             for (unsigned int i = 0; i < num_bodies; ++i) {
+                // writing a body to the file
                 Body tmp = sim->getBodies()[i];
                 sim_file << tmp.getX() << " " << tmp.getY() << " " << tmp.getVelocityX() << " " << tmp.getVelocityY() << " " << tmp.getMass() << std::endl;
             }

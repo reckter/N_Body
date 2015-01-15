@@ -144,10 +144,12 @@ namespace practical {
         private:
             /**
             * Handles collision between bodies before a time step
-            * TODO Needs to be completed
             */
             void handleCollisions();
 
+            /**
+            * handles a single collision between to bodies
+            */
             void handleSingleCollision(Body* body1, Body* body2);
         };
 
