@@ -54,7 +54,6 @@ namespace practical {
             sim->setDistance(distance);
 
             while (rcounter++ < num_bodies && sim_file >> px >> py >> vx >> vy >> mass) {
-
                 // adding a body to the simulation
                 Body tmp(px, py, distance / 2, vx, vy, mass);
                 sim->addBody(tmp);

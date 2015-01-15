@@ -86,8 +86,8 @@ namespace practical {
                     // go through all other bodies to calculate the acceleration they cause on the current one
                     for (int j = 0; j < bodies.size(); j++) {
 
-                        // only calculate the acceletration if the other body is different from the current one
-                        // and if its mass isnÄt 0
+                        // only calculate the acceleration if the other body is different from the current one
+                        // and if its mass isn't 0
                         Body *iter2 = &(bodies[j]);
                         if (i != j && iter2->getMass() != 0) {
 
@@ -114,7 +114,7 @@ namespace practical {
                     }
                 }
 
-                // adding the acceleration to the movement
+                // adding the acceleration to the velocity
                 iter->setVelocityX(iter->getVelocityX() + accelerationX * dt);
                 iter->setVelocityY(iter->getVelocityY() + accelerationY * dt);
 
@@ -133,7 +133,7 @@ namespace practical {
         void Simulation::handleCollisions() {
 
             // all the collisions that we found
-            std::vector<std::pair<Body *, Body *> > collisions;
+            std::vector< std::pair<Body*, Body*> > collisions;
 
             // we go through all the bodies and check if the current one collides with the second one
             #pragma omp parallel for collapse(2)
@@ -143,7 +143,7 @@ namespace practical {
                     Body *iter2 = &(bodies[j]);
                     if (iter != iter2 && iter->collidesWith(*iter2)) {
 
-                        // we collide so we at both bodies to the list
+                        // we collide so we add both bodies to the list
                     #pragma omp critical
                         collisions.push_back(std::pair<Body *, Body *>(&(*iter), &(*iter2)));
                     }
@@ -159,7 +159,7 @@ namespace practical {
 
         void Simulation::handleSingleCollision(Body *body1, Body *body2) {
 
-            // the suriving body is the bigger one, so if two bodies collide and one of them is zero
+            // the surviving body is the bigger one, so if two bodies collide and one of them is zero
             // the bigger survives.
             Body *bodyA;
             Body *bodyB;
@@ -171,12 +171,14 @@ namespace practical {
                 bodyB = body1;
             }
 
-            // the new mass is the two masses
+            // the new mass is sum of the two masses
             float newMass = bodyA->getMass() + bodyB->getMass();
 
             // the velocity is = (v_i * m_i + v_j * m_j) / m
             float newVelocityX = (bodyA->getMass() * bodyA->getVelocityX() + bodyB->getMass() * bodyB->getVelocityX()) / newMass;
             float newVelocityY = (bodyA->getMass() * bodyA->getVelocityY() + bodyB->getMass() * bodyB->getVelocityY()) / newMass;
+
+            // set the new mass and destroy the other body
             bodyA->setMass(newMass);
             bodyB->setMass(0);
 
@@ -207,11 +209,6 @@ namespace practical {
             const float p_scaler = 1.0f / scale;
             for (unsigned int i = 0; i < num_bodies; ++i) {
                 if (bodies[i].getMass() > 0) {
-                    /* TODO visualize all bodies (with mass > 0.0) here
-                 * use p_scaler to scale positional coordinates to ~[-1,1]
-                 * */
-
-
                     vis.addBody(bodies[i].getX() * p_scaler, bodies[i].getY() * p_scaler, bodies[i].getMass(), bodies[i].getVelocityX() * p_scaler, bodies[i].getVelocityY() * p_scaler);
                 }
             }

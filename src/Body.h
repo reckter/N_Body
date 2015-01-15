@@ -1,6 +1,7 @@
 #ifndef BODY_DEF
 #define BODY_DEF
 
+// simple data structure that just holds a couple of values
 class Body {
 private:
     float x;
@@ -14,10 +15,14 @@ private:
     float mass;
 
 public:
+
+    // default constructor
     Body(float x, float y, float radius, float velocityX, float velocityY, float mass)
             : x(x), y(y), radius(radius), velocityX(velocityX), velocityY(velocityY), mass(mass) {
     }
 
+
+    // getters and setters
     float getX() const {
         return x;
     }
@@ -67,7 +72,7 @@ public:
     }
 
     /**
-    * chefks if the two bodys would collide
+    * checks for collision with another body
     */
     bool collidesWith(Body other) {
         float diffx = other.getX() - x;

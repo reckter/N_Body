@@ -54,7 +54,6 @@ namespace practical {
             /**
             * Reads simulation data from a file.
             * Uses Config.
-            * TODO needs to be completed for chosen data structure
             */
             bool initialize();
 
@@ -65,26 +64,22 @@ namespace practical {
 
             /**
             * @see SimGUIAdapter.h
-            * TODO needs to be completed
             */
             void nextTimestep();
 
             /**
             * @see SimGUIAdapter.h
-            * TODO Needs to be completed
             */
             void setMinMaxMass(ui::BodyVisualization &vis) const;
 
             /**
             * @see SimGUIAdapter.h
-            * TODO Needs to be completed
             */
             void visualize(ui::BodyVisualization &vis) const;
 
             /**
             * Simply writes results of the simulation to a file.
             * Uses Config.
-            * TODO needs to be completed for chosen data structure
             */
             bool writeResults() const;
 
