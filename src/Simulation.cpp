@@ -138,7 +138,7 @@ namespace practical {
             // we go through all the bodies and check if the current one collides with the second one
             #pragma omp parallel for collapse(2)
             for (int i = 0; i < bodies.size(); i++) {
-                for (int j = 0; j < bodies.size(); j++) {
+                for (int j = i + 1; j < bodies.size(); j++) {
                     Body *iter = &(bodies[i]);
                     Body *iter2 = &(bodies[j]);
                     if (iter != iter2 && iter->collidesWith(*iter2)) {
