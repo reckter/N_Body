@@ -35,7 +35,7 @@ namespace practical {
             handleCollisions();
 
 
-#pragma omp parallel for schedule(dynamic)
+#pragma omp parallel for
             for (int i = 0; i < bodies.size(); i++) {
 
                 Body *iter = &(bodies[i]);
@@ -68,7 +68,7 @@ namespace practical {
 
             }
 
-#pragma omp parallel for schedule(dynamic)
+#pragma omp parallel for
             for (int i = 0; i < bodies.size(); i++) {
                 Body *iter = &(bodies[i]);
                 iter->setX(iter->getX() + iter->getVelocityX() * dt);
@@ -81,7 +81,7 @@ namespace practical {
 
             std::vector<std::pair<Body *, Body *> > collisions;
 
-#pragma omp parallel for collapse(2) schedule(dynamic)
+#pragma omp parallel for collapse(2)
             for (int i = 0; i < bodies.size(); i++) {
                 for (int j = 0; j < bodies.size(); j++) {
                     Body *iter = &(bodies[i]);
