@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : Praktikum4.cpp
-// Author      :
-// Version     :
+// Author      : Mischa Holz, Hannes Guedelhoefer
+// Version     : 1.0
 // Description : Main entry point. In principle nothing to be done here.
 //============================================================================
 
