@@ -1,8 +1,11 @@
 #!/bin/sh
 
 
+echo ">>>$1<<<"
+
+
 echo "\nbuilding without anything"
-cmake -DBUILD_QT=OFF -DUSE_OPENMP=OFF $1> /dev/null &&
+cmake -DBUILD_QT=OFF -DUSE_OPENMP=OFF $1 > /dev/null &&
 make clean > /dev/null &&
 make > /dev/null &&
 

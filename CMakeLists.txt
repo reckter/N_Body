@@ -3,6 +3,7 @@ PROJECT (P4)
 
 option(BUILD_QT "Build Project with Qt Gui." OFF)
 option(USE_OPENMP "Build Project with OpenMP support." OFF)
+option(PRETTY_OUT "Build with pretty out" OFF)
 
 set(EXEC praktikum4)
 set(CMAKE_VERBOSE_MAKEFILE on)
@@ -62,6 +63,11 @@ if(USE_OPENMP)
 else(USE_OPENMP)
 	message("OpenMP support NOT requested.")
 endif(USE_OPENMP)
+
+if(PRETTY_OUT)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DPRETTY_OUT")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DPRETTY_OUT")
+endif(PRETTY_OUT)
 
 add_executable(${EXEC}
     src/Praktikum4.cpp

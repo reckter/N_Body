@@ -26,17 +26,43 @@ namespace practical {
         }
 
         void Simulation::run() {
-            float k = 0;
             for (unsigned int step = 0; step < num_steps; ++step) {
                 nextTimestep();
-                if((float) step / (float)num_steps > k + 0.005) {
-                    k += 0.005;
-                    std::cout << "#";
+
+                #ifdef PRETTY_OUT
+                if(step % 1000 == 0) {
+                    float p = (float) step / (float) num_steps;
+                    int num = (int) (50.0 * p);
+
+                    std::cout << "\r";
+                    std::cout << "|";
+                    for(int i = 0; i < num; i++) {
+                        std::cout << "#";
+                    }
+                    for(int i = num; i < 50; i++) {
+                        std::cout << " ";
+                    }
+                    std::cout << "| " << p * 100 << "%";
+
                     std::cout.flush();
                 }
+                #endif
             }
 
-            std::cout << std::endl;
+#ifdef PRETTY_OUT
+            float p = 1.0;
+            int num = (int) (50.0 * p);
+
+            std::cout << "\r";
+            std::cout << "|";
+            for(int i = 0; i < num; i++) {
+                std::cout << "#";
+            }
+            for(int i = num; i < 50; i++) {
+                std::cout << " ";
+            }
+            std::cout << "| " << p * 100 << "%" << std::endl;
+            #endif
         }
 
         void Simulation::nextTimestep() {
