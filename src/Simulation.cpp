@@ -26,9 +26,17 @@ namespace practical {
         }
 
         void Simulation::run() {
+            float k = 0;
             for (unsigned int step = 0; step < num_steps; ++step) {
                 nextTimestep();
+                if((float) step / (float)num_steps > k + 0.005) {
+                    k += 0.005;
+                    std::cout << "#";
+                    std::cout.flush();
+                }
             }
+
+            std::cout << std::endl;
         }
 
         void Simulation::nextTimestep() {
